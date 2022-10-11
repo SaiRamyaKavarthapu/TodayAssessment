@@ -13,8 +13,6 @@ const Summary = ({ data, slc, setNexts, setVal, setSl }) => {
   
   const handleBack = () => {
     setNexts(false);
-    setVal(data);
-    setSl(slc);
   };
 
   return (

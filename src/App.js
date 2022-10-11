@@ -15,15 +15,19 @@ export default function App() {
       setVal({ ...val, [e.target.name]: e.target.value });
     } else if (e.target.type === "checkbox") {
       const localv = tempt.push(e.target.value);
+      console.log("localv",localv)
       if (!tempt.includes(e.target.value)) setTempt(localv);
+      
       setVal({ ...val, [e.target.name]: tempt });
+      console.log("tempt",tempt)
     } else {
       setVal({ ...val, [e.target.name]: e.target.value });
     }
     console.log(val);
   };
   const append = (e) => {
-    setSl(sl + 5);
+    if(e === "+") setSl(sl+5) 
+   else setSl(sl-5)
   };
 
   const handleNext = (e) => {
@@ -38,10 +42,10 @@ export default function App() {
       setSl={setSl}
     />
   ) : (
-    <>
+    <>  
       <div className="App">
         <div className="container-md">
-          <h1>Pain & Functional Description</h1>
+          <h1 class="text-primary">Pain & Functional Description</h1>
           <p>
             The description of the current situation gives your Optimum Trainer
             a picture of and clues to the underlying causes of your problems
@@ -57,7 +61,6 @@ export default function App() {
               id="exampleFormControlTextarea1"
               name="Title description"
               rows="3"
-              value={Object.values(val)[0]}
               onChange={handleChange}
             ></textarea>
           </div>
@@ -97,15 +100,31 @@ export default function App() {
               </p>
             </>
           ))}
+          {sl <= questions.values.length ?   
           <div class="d-grid gap-2">
             <button
               type="button"
               className="btn btn-outline-danger mb-3"
-              onClick={append}
+              onClick={()=>{append("+")}}
             >
               +
             </button>
-          </div>
+          </div>  : ""
+        
+          }
+            {sl > 5 ?   
+          <div class="d-grid gap-2">
+            <button
+              type="button"
+              className="btn btn-outline-danger mb-3"
+              onClick={()=>{append("-")}}
+            >
+              -
+            </button>
+          </div>  : ""
+        
+          }
+
           <div className="mb-3">
             <button
               type="button"
